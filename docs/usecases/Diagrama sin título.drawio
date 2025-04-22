@@ -10,11 +10,16 @@
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-11" value="Calcular resultado del examen académico&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="110" y="260" width="120" height="80" as="geometry" />
         </mxCell>
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-12" target="6lRI0SPo2LRtaiyrAJHG-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-47" value="«include»" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="6lRI0SPo2LRtaiyrAJHG-46">
+          <mxGeometry x="-0.0821" y="3" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-12" value="Analizar Respuestas con IA" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="595" y="260" width="120" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="6lRI0SPo2LRtaiyrAJHG-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-14" target="6lRI0SPo2LRtaiyrAJHG-10">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-14" target="6lRI0SPo2LRtaiyrAJHG-11">
           <mxGeometry relative="1" as="geometry" />
@@ -51,15 +56,6 @@
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-20" value="Profesor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="380" y="50" width="30" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="6lRI0SPo2LRtaiyrAJHG-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-23" target="6lRI0SPo2LRtaiyrAJHG-11">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="610" y="18.399993896484375" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="610" y="20" />
-              <mxPoint x="212" y="20" />
-            </Array>
-          </mxGeometry>
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-23" value="SIstema" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="595" y="50" width="30" height="60" as="geometry" />
