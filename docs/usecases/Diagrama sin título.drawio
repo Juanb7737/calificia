@@ -77,6 +77,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-51" value="Modulo: Gestión de calificaciones (RF02)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="170" width="170" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
