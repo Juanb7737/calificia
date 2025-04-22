@@ -44,18 +44,17 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-17" value="Estudiante" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="140" y="50" width="30" height="60" as="geometry" />
+          <mxGeometry x="120" y="50" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="6lRI0SPo2LRtaiyrAJHG-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-20" target="6lRI0SPo2LRtaiyrAJHG-14">
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-20" target="6lRI0SPo2LRtaiyrAJHG-14">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="490" y="80" />
-              <mxPoint x="490" y="300" />
+              <mxPoint x="410" y="80" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-20" value="Profesor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
-          <mxGeometry x="380" y="50" width="30" height="60" as="geometry" />
+          <mxGeometry x="440" y="50" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-23" value="SIstema" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
           <mxGeometry x="595" y="50" width="30" height="60" as="geometry" />
@@ -63,8 +62,18 @@
         <mxCell id="6lRI0SPo2LRtaiyrAJHG-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-23" target="6lRI0SPo2LRtaiyrAJHG-12">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="528" y="70" />
+              <mxPoint x="528" y="90" />
               <mxPoint x="528" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-48" value="Plataforma web" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="50" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="6lRI0SPo2LRtaiyrAJHG-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6lRI0SPo2LRtaiyrAJHG-48" target="6lRI0SPo2LRtaiyrAJHG-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="170" y="80" />
             </Array>
           </mxGeometry>
         </mxCell>
