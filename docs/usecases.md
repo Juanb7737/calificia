@@ -8,7 +8,7 @@ Este módulo abarca la funcionalidad de generación y evaluación automatizada d
 
 ## Módulo: Gestión de Calificaciones (RF02)
 
-![Diagrama de Casos de Uso para Gestión de Calificaciones](docs/usecases/UCD-gestionDeCalificaciones.svg)
+![Diagrama de Casos de Uso para Gestión de Calificaciones](diagrams/usecases/UCD-gestionDeCalificaciones.svg)
 
 Este módulo gestiona el cálculo de notas . El sistema calcula automáticamente las calificaciones según criterios establecidos pro el profesor.
 
