@@ -10,5 +10,9 @@ Este módulo abarca la funcionalidad de generación y evaluación automatizada d
 
 ![Diagrama de Casos de Uso para Gestión de Calificaciones](diagrams/usecases/UCD-gestionDeCalificaciones.svg)
 
-Este módulo gestiona el cálculo de notas . El sistema calcula automáticamente las calificaciones según criterios establecidos pro el profesor.
+Este módulo gestiona el cálculo de notas. 
+El sistema calcula automáticamente las calificaciones según criterios establecidos por el profesor.
+El sistema guarda las calificaciones obtenidos por el alumno.
+El sistema calcula automáticamente el promedio del alumno segun las notas obtenidas.
+El sistema permite al alumno visualizar el promedio obtenido.
 
