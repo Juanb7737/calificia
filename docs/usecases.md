@@ -1,6 +1,6 @@
 # Diagramas de Casos de Uso
 
-## Módulo: Gestión de Exámenes (RF01)
+## Módulo: Gestión de Exámenes (RF01, RF03)
 
 ![Diagrama de Casos de Uso para Gestión de Exámenes](diagrams/usecases/UCD-gestionDeExamenes.svg)
 
