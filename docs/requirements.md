@@ -5,7 +5,7 @@
 
 - **RF03 -  El sistema debe guardar y permitir la visualización de las notas y promedios:** Después de cada evaluación, el sistema guardará las notas evaluadas, permitirá la visualización de estas y calculará los promedios. 
 
-- **RF04 - El sistema debe tener un procedimiento de log-in y registro:** La plataforma facilitirá la posibilidad de crear una cuenta para los usuarios cuya finalidad sea el fácil acceso a la información e historial de las actividades aplicadas.
+[- **RF04 - El sistema debe tener un procedimiento de log-in y registro:** La plataforma facilitirá la posibilidad de crear una cuenta para los usuarios cuya finalidad sea el fácil acceso a la información e historial de las actividades aplicadas.]
 
 ## Requerimientos No Funcionales: ##
 - **RN01 - Interfaz intuitiva y amigable:** El sistema debe ser fácil de usar para profesores con distintos niveles de habilidad tecnológica, siguiendo principios de diseño centrado en el usuario y minimizando la curva de aprendizaje.
