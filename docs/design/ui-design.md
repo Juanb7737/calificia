@@ -2,5 +2,5 @@
 
 ## UserFlows
 
-![Diagrama de flujo Login] (docs/design/flows/FLOW-Login.svg)
+![Diagrama de flujo Login](docs/design/flows/FLOW-Login.svg)
 
