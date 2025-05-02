@@ -1,1 +1,68 @@
+' Definimos los actores principales
+class Profesor {
+    - id: int
+    - nombre: String
+    - correo: String
+    + generarExamen(contenido: Documento, nivel: String, objetivos: List<String>): Examen
+    + revisarResultados(examen: Examen): void
+}
 
+class Estudiante {
+    - id: int
+    - nombre: String
+    - correo: String
+    + presentarExamen(examen: Examen): Resultado
+}
+
+class Examen {
+    - id: int
+    - fechaCreacion: Date
+    - nivelEducativo: String
+    - objetivos: List<String>
+    - preguntas: List<Pregunta>
+    + agregarPregunta(p: Pregunta): void
+}
+
+class Pregunta {
+    - id: int
+    - texto: String
+    - opciones: List<String>
+    - respuestaCorrecta: String
+    + evaluar(respuestaEstudiante: String): bool
+}
+
+class Documento {
+    - id: int
+    - tipo: String <<PDF, DOCX>>
+    - contenido: String
+    + analizarContenido(): List<String>
+}
+
+class IA {
+    + generarPreguntas(documento: Documento, objetivos: List<String>): List<Pregunta>
+    + evaluarExamen(examen: Examen, respuestas: Map<int, String>): Resultado
+}
+
+class Resultado {
+    - id: int
+    - examen: Examen
+    - estudiante: Estudiante
+    - calificacion: float
+    + calcularPromedio(): float
+}
+
+class GestorCalificaciones {
+    + obtenerPromedio(estudiante: Estudiante): float
+    + mostrarEstadisticas(): void
+}
+
+' Relaciones
+Profesor "1" --> "many" Examen : crea
+Estudiante "1" --> "many" Resultado : obtiene
+Examen "1" --> "many" Pregunta : contiene
+Examen --> Documento : usa
+Examen --> IA : usa para generar
+Resultado --> Examen
+Resultado --> Estudiante
+GestorCalificaciones --> Resultado : gestiona
+IA --> Documento : analiza
