@@ -1,4 +1,4 @@
-@startuml
+@startuml sistemaCalificia
 
 ' Definimos los actores principales
 class Profesor {
