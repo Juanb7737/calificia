@@ -1,19 +1,29 @@
 @startuml sistemaCalificia
 
 ' Definimos los actores principales
-class Profesor {
+
+Class Cliente {
     - id: int
-    - nombre: String
     - correo: String
-    + generarExamen(contenido: Documento, nivel: String, objetivos: List<String>): Examen
+    - nombre: String
+    - pass: String
+    - tipoCuenta: int
+    + generarExamen(contenido: Documento, nivel: Documento, objetivos: List<String>): Examen
     + revisarResultados(examen: Examen): void
+    + presentarExamen(examen: Examen): Resultado
+}
+
+Class Auth {
+    + verificarAuten(): bool
+    + verificarAutor(): bool
+    + login(correo, pass, tipoCuenta: Cliente): bool
+    + logout(): String
+}
+
+class Profesor {
 }
 
 class Estudiante {
-    - id: int
-    - nombre: String
-    - correo: String
-    + presentarExamen(examen: Examen): Resultado
 }
 
 class Examen {
@@ -41,7 +51,7 @@ class Documento {
 }
 
 class IA {
-    + generarPreguntas(documento: Documento, objetivos: List<String>): List<Pregunta>
+    + generarPreguntas(documento: Documento, objetivos: Examen): List<Pregunta>
     + evaluarExamen(examen: Examen, respuestas: Map<int, String>): Resultado
 }
 
@@ -54,20 +64,27 @@ class Resultado {
 }
 
 class GestorCalificaciones {
-    + obtenerPromedio(estudiante: Estudiante): float
+    + obtenerPromedio(nombre: Estudiante): float
     + mostrarEstadisticas(): void
 }
 
+
+
+
+
 ' Relaciones
-Profesor "1" --> "many" Examen : crea
-Estudiante "1" --> "many" Resultado : obtiene
-Examen "1" --> "many" Pregunta : contiene
+Cliente --> Profesor : puede ser
+Cliente --> Estudiante : puede ser
+Auth --> Cliente : verifica
+Profesor --> Examen : crea
+Estudiante --> Resultado : obtiene
+Examen --> Pregunta : contiene
 Examen --> Documento : usa
 Examen --> IA : usa para generar
-Resultado --> Examen
-Resultado --> Estudiante
+Examen --> Resultado : tiene un
 GestorCalificaciones --> Resultado : gestiona
 IA --> Documento : analiza
+Estudiante --> Examen : hace
 
 @enduml
 
