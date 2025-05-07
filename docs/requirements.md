@@ -1,70 +1,82 @@
-## Requerimientos Funcionales: ##
-- **RF01 - Generación y evaluación automatizada de exámenes:**
-  - Los profesores podrán crear exámenes personalizados seleccionando:
-    - Nivel educativo (desde 1° Básico hasta 4° Medio).
-    - Tipo de preguntas (opción múltiple, verdadero/falso, ensayo, etc.).
-  - El sistema utilizará IA para:
-    - Analizar documentos PDF proporcionados por el profesor para identificar el contenido y contexto del examen.
-    - Generar preguntas basadas en el contenido del documento.
-  - Los exámenes generados estarán enfocados exclusivamente en la asignatura de Matemáticas.
-  - Los exámenes podrán ser exportados en formatos PDF o digitales.
-  - El sistema evaluará automáticamente las respuestas de los estudiantes (excepto preguntas abiertas, que requerirán revisión manual).
+# Requerimientos Funcionales 
 
-- **RF02 - Cálculo y gestión de notas y promedios:**
-  - La plataforma calculará automáticamente las calificaciones de cada examen según los criterios establecidos por el profesor (ponderación, penalizaciones, etc.).
-  - Guardará un historial de todas las evaluaciones realizadas.
-  - Calculará promedios por:
-    - Estudiante.
-    - Curso.
-  - Permitirá la edición manual de calificaciones por parte del profesor.
+## RF01 - Generación y evaluación de exámenes
 
-- **RF03 - Almacenamiento y visualización de notas y promedios:**
-  - El sistema guardará las notas evaluadas en una base de datos segura.
-  - Permitirá a los usuarios (profesores y estudiantes) visualizar:
-    - Notas individuales por examen.
-    - Promedios acumulativos.
-    - Historial de evaluaciones.
-  - Incluirá gráficos y reportes descargables para facilitar el análisis de resultados.
+### RF01.1 - Creación de exámenes
+- RF01.1.1: Seleccionar nivel educativo (1° Básico a 4° Medio).
+- RF01.1.2: Elegir tipos de preguntas (opción múltiple, V/F, desarrollo).
+- RF01.1.3: Cargar documento PDF como fuente de contenido.
 
-- **RF04 - Registro y autenticación de usuarios:**
-  - El sistema permitirá a los usuarios registrarse con:
-    - Nombre completo.
-    - Correo electrónico.
-    - Contraseña segura.
-    - Rol (profesor o estudiante).
-  - Implementará un sistema de inicio de sesión con validación de credenciales.
-  - Permitirá la recuperación de contraseñas mediante correo electrónico.
+### RF01.2 - Generación con IA
+- RF01.2.1: Análisis del documento PDF cargado.
+- RF01.2.2: Generación de preguntas basadas en el contenido.
+- RF01.2.3: Creación de respuestas correctas y distractores.
 
-- **RF05 - Gestión de usuarios y roles:**
-  - Los profesores podrán:
-    - Crear y gestionar grupos de estudiantes.
-    - Asignar exámenes a grupos específicos.
-  - Los estudiantes podrán:
-    - Acceder a sus exámenes asignados.
-    - Consultar sus calificaciones y promedios.
+### RF01.3 - Gestión de exámenes
+- RF01.3.1: Exportar exámenes en PDF.
+- RF01.3.2: Evaluar automáticamente preguntas cerradas.
+- RF01.3.3: Permitir calificación manual de preguntas abiertas.
+
+## RF02 - Gestión de calificaciones
+
+### RF02.1 - Cálculo de notas
+- RF02.1.1: Calcular nota según porcentaje de respuestas correctas.
+- RF02.1.2: Permitir ajustes manuales a las calificaciones.
+
+### RF02.2 - Promedios
+- RF02.2.1: Calcular promedio por estudiante.
+- RF02.2.2: Calcular promedio por curso.
+
+## RF03 - Visualización de resultados
+
+### RF03.1 - Acceso a calificaciones
+- RF03.1.1: Mostrar notas individuales por examen.
+- RF03.1.2: Mostrar promedios acumulativos.
+- RF03.1.3: Generar reportes básicos de rendimiento.
+
+## RF04 - Usuarios y autenticación
+
+### RF04.1 - Cuentas de usuario
+- RF04.1.1: Registro con nombre, correo y contraseña.
+- RF04.1.2: Inicio de sesión seguro.
+- RF04.1.3: Recuperación de contraseña por correo.
+
+## RF05 - Gestión de grupos
+
+### RF05.1 - Administración de estudiantes
+- RF05.1.1: Crear grupos de estudiantes.
+- RF05.1.2: Asignar exámenes a grupos.
+- RF05.1.3: Permitir a estudiantes acceder a sus exámenes y notas.
 
 ---
 
-## Requerimientos No Funcionales: ##
+# Requerimientos No Funcionales 
 
-- **RN01 - Interfaz intuitiva y amigable:**
-  - El sistema debe ser fácil de usar para usuarios con distintos niveles de habilidad tecnológica.
-  - Seguirá principios de diseño centrado en el usuario, con una navegación clara y accesible.
-  - Incluirá tutoriales o guías rápidas para nuevos usuarios.
+## RNF01 - Interfaz y Usabilidad
 
-- **RN02 - Rendimiento y velocidad óptimos:**
-  - El sistema debe responder en menos de 2 segundos para la mayoría de las operaciones (como cargar exámenes o mostrar calificaciones).
-  - Escalará eficientemente para manejar hasta 1,000 usuarios concurrentes.
+- RNF01.1: Diseño intuitivo adaptable a distintos niveles de habilidad tecnológica.
+- RNF01.2: Navegación clara con estructura lógica de menús y opciones.
+- RNF01.3: Incorporación de ayudas visuales para nuevos usuarios.
 
-- **RN03 - Seguridad de datos:**
-  - Toda la información sensible (como contraseñas y calificaciones) será almacenada de forma encriptada.
-  - Implementará medidas de protección contra accesos no autorizados, como autenticación de dos factores (opcional).
+## RNF02 - Rendimiento
 
-- **RN04 - Compatibilidad multiplataforma:**
-  - El sistema será accesible desde navegadores modernos (Chrome, Firefox, Edge) y dispositivos móviles (responsivo).
+- RNF02.1: Tiempo de respuesta optimos para operaciones estándar.
+- RNF02.2: Capacidad para gestionar hasta 1,000 usuarios concurrentes.
+- RNF02.3: Optimización de carga de recursos para minimizar tiempos de espera.
 
-- **RN05 - Mantenimiento y escalabilidad:**
-  - El sistema debe ser fácil de mantener, con un código modular y bien documentado.
-  - Permitirá la adición de nuevas funcionalidades sin afectar las existentes.
+## RNF03 - Seguridad
 
+- RNF03.1: Encriptación de datos sensibles en almacenamiento.
+- RNF03.2: Protección contra accesos no autorizados.
+
+## RNF04 - Compatibilidad
+
+- RNF04.1: Funcionamiento en navegadores modernos (Chrome, Firefox, Edge).
+- RNF04.2: Diseño responsivo.
+- RNF04.3: Visualización correcta en diferentes tamaños de pantalla.
+
+## RNF05 - Mantenibilidad
+
+- RNF05.1: Estructura modular del código para facilitar mantenimiento.
+- RNF05.2: Capacidad de incorporar nuevas funciones sin afectar las existentes.
 ---
