@@ -1,30 +1,30 @@
 # Diagramas de Flujo (UserFlows, TaskFlows, WireFlows)
 
-# Índice
+## Índice
 - [UserFlows](#userflows)
 - [TaskFlows](#taskflows)
-  - [TaskFlows-Alumno](#taskflows-alumno)
-  - [TaskFlows-Profesor](#taskflows-profesor)
+  - [TaskFlows-Alumno](#taskflow-alumno)
+  - [TaskFlows-Profesor](#taskflow-profesor)
 - [WireFlows](#wireflows)
   - [WireFlow-Home-Alumno](#wireflow-home-alumno)
   - [WireFlow-Home-Profesor](#wireflow-home-profesor)
 
-## UserFlows
+## Userflows
 
 ![Diagrama de flujo Login](flows/USERFLOW-Login.svg)
 
-## TaskFlows
+## Taskflows
 
-### TaskFlows-Alumno
+### Taskflow-Alumno
 ![Diagrama de flujo TaskFlow-Alumnos](flows/TASKFLOW-Alumno.svg)
 
-### TaskFlows-Profesor
+### Taskflow-Profesor
 ![Diagrama de flujo TaskFlow-Profesor](flows/TASKFLOW-Profesor.svg)
 
-## WireFlows
+## Wireflows
 
-### WireFlow-Home-Alumno
+### Wireflow-Home-Alumno
 ![Diagrama de flujo WireFlow-Home-Alumno](flows/WIREFLOW-Home-Alumno.png)
 
-### WireFlow-Home-Profesor
+### Wireflow-Home-Profesor
 ![Diagrama de flujo WireFlow-Home-Profesor](flows/WIREFLOW-Home-Profesor.png)
