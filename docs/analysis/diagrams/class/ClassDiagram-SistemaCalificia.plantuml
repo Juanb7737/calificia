@@ -1,90 +1,131 @@
-@startuml sistemaCalificia
+@startuml calificia
 
-' Definimos los actores principales
+    ' Definición de clases
 
-Class Cliente {
-    - id: int
-    - correo: String
-    - nombre: String
-    - pass: String
-    - tipoCuenta: int
-    + generarExamen(contenido: Documento, nivel: Documento, objetivos: List<String>): Examen
-    + revisarResultados(examen: Examen): void
-    + presentarExamen(examen: Examen): Resultado
-}
+    class Cliente {
+        - id: int
+        - correo: String
+        - nombre: String
+        - pass: String
+        - tipoCuenta: int
+        + revisarResultados(examen): void
+        + presentarExamen(examen): Resultado
+    }
+    
+    class Auth {
+        + verificarAuten(): bool
+        + verificarAutor(): bool
+        + login(correo,pass,tipo): bool
+        + logout(): String
+        + recuperarPassword(correo): void
+        + registrarUsuario(...): Cliente
+    }
+    
+    class Profesor {
+        + crearExamen(...): Examen
+        + evaluarRespuestas(...): void
+        + ajustarCalificacion(...): void
+        + crearGrupo(...): Grupo
+        + asignarExamen(...): void
+        + generarReporte(...): Reporte
+    }
+    
+    class Estudiante {
+        - curso: Curso
+        + realizarExamen(...): void
+        + verNotas(): List~Resultado~
+        + verPromedio(): float
+    }
+    
+    class Grupo {
+        - id: int
+        - nombre: String
+        - estudiantes: List~Estudiante~
+        + agregarEstudiante(...): void
+        + asignarExamen(...): void
+    }
+    
+    class Curso {
+        - id: int
+        - nombre: String
+        - nivelEducativo: String
+        + calcularPromedio(): float
+    }
+    
+    class Examen {
+        - id: int
+        - fechaCreacion: Date
+        - nivelEducativo: String
+        - objetivos: List~String~
+        - preguntas: List~Pregunta~
+        + agregarPregunta(p: Pregunta): void
+        + exportarPDF(): File
+        + evaluarAutomaticamente(...): Resultado
+        + evaluarManualmente(...): Resultado
+        + asignarAGrupo(grupo: Grupo): void
+    }
+    
+    class Pregunta {
+        - id: int
+        - texto: String
+        - tipoPregunta: List~String~
+        - opciones: List~String~
+        - respuestaCorrecta: String
+        - puntaje: float
+        + evaluar(respuesta): bool
+        + requiresManualEval(): bool
+    }
+    
+    class Documento {
+        <<PDF>>
+        - id: int
+        - nombre: String
+        - contenido: byte[]
+        - fechaCarga: Date
+        + analizarContenido(): List~String~
+        + cargarPDF(file: File): void
+    }
+    
+    class IA {
+        + generarPreguntas(doc, obj): List~Pregunta~
+        + evaluarExamen(examen, resp): Resultado
+        + analizarDocumento(doc: Documento): List~String~
+    }
+    
+    class Resultado {
+        - id: int
+        - examen: Examen
+        - estudiante: Estudiante
+        - respuestas: Map~int, String~
+        - calificacion: float
+        - fechaRealizacion: Date
+        + calcularPromedio(): float
+        + ajustarCalificacion(nota: float): void
+    }
+    
+    class GestorCalificaciones {
+        + obtenerPromedio(est): float
+        + obtenerPromedioCurso(curso): float
+        + ajustarCalificacion(...): void
+        + mostrarEstadisticas(): void
+    }
+    
+    
+    ' Relaciones
+    Cliente <|-- Profesor : herencia
+    Cliente <|-- Estudiante : herencia
+    Auth --> Cliente : verifica
+    Profesor --> Examen : crea
+    Estudiante --> Resultado : obtiene
+    Examen *-- Pregunta : contiene
+    Examen --> Documento : usa
+    Examen --> IA : usa para generar
+    Examen --> Resultado : tiene un
+    GestorCalificaciones --> Resultado : gestiona
+    IA --> Documento : analiza
+    Estudiante --> Examen : hace
+    Estudiante --> Curso : pertenece
+    Grupo o-- Estudiante : contiene
+    Profesor --> Grupo : administra
 
-Class Auth {
-    + verificarAuten(): bool
-    + verificarAutor(): bool
-    + login(correo, pass, tipoCuenta: Cliente): bool
-    + logout(): String
-}
-
-class Profesor {
-}
-
-class Estudiante {
-}
-
-class Examen {
-    - id: int
-    - fechaCreacion: Date
-    - nivelEducativo: String
-    - objetivos: List<String>
-    - preguntas: List<Pregunta>
-    + agregarPregunta(p: Pregunta): void
-}
-
-class Pregunta {
-    - id: int
-    - texto: String
-    - opciones: List<String>
-    - respuestaCorrecta: String
-    + evaluar(respuestaEstudiante: String): bool
-}
-
-class Documento {
-    - id: int
-    - tipo: String <<PDF, DOCX>>
-    - contenido: String
-    + analizarContenido(): List<String>
-}
-
-class IA {
-    + generarPreguntas(documento: Documento, objetivos: Examen): List<Pregunta>
-    + evaluarExamen(examen: Examen, respuestas: Map<int, String>): Resultado
-}
-
-class Resultado {
-    - id: int
-    - examen: Examen
-    - estudiante: Estudiante
-    - calificacion: float
-    + calcularPromedio(): float
-}
-
-class GestorCalificaciones {
-    + obtenerPromedio(nombre: Estudiante): float
-    + mostrarEstadisticas(): void
-}
-
-
-
-
-
-' Relaciones
-Cliente --> Profesor : puede ser
-Cliente --> Estudiante : puede ser
-Auth --> Cliente : verifica
-Profesor --> Examen : crea
-Estudiante --> Resultado : obtiene
-Examen --> Pregunta : contiene
-Examen --> Documento : usa
-Examen --> IA : usa para generar
-Examen --> Resultado : tiene un
-GestorCalificaciones --> Resultado : gestiona
-IA --> Documento : analiza
-Estudiante --> Examen : hace
-
-@enduml
-
+    @enduml
