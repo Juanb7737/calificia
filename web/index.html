@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalificIA</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/router.css">
+    <script type="module" src="public/js/app.js"></script>
+    <script type="module" src="public/js/router.js"></script>
+    <!-- Importamos los Web Components -->
+    <script type="module" src="public/js/components/login-form.js"></script>
+    <script type="module" src="public/js/components/register-form.js"></script>
+    <script type="module" src="public/js/components/auth-email.js"></script>
+    <script type="module" src="public/js/components/main-view.js"></script>
+    <script type="module" src="public/js/components/nav-bar.js"></script>
+</head>
+<body>
+    <!-- Componente de navegación -->
+    <nav-bar></nav-bar>
+    
+    <!-- Contenedor principal donde se cargarán las vistas -->
+    <main id="app">
+        <!-- Cada ruta se define con un elemento section -->
+        <section class="route" id="inicio">
+            <h1>Bienvenido CalificIA</h1>
+            <p>Por favor, inicia sesión o regístrate para continuar.</p>
+            <div class="buttons">
+                <a href="#/login" class="btn">Iniciar Sesión</a>
+                <a href="#/register" class="btn">Registrarse</a>
+            </div>
+        </section>
+        
+        <section class="route" id="login">
+            <login-form></login-form>
+        </section>
+        
+        <section class="route" id="register">
+            <register-form></register-form>
+        </section>
+        
+        <section class="route" id="auth-email">
+            <auth-email></auth-email>
+        </section>
+        
+        <section class="route" id="main-view">
+            <main-view></main-view>
+        </section>
+    </main>
+    
+    <!-- Script para el enrutador -->
+    <script src="public/js/router.js"></script>
+</body>
+</html>

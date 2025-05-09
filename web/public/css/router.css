@@ -1,0 +1,21 @@
+/* Estilos para el enrutador */
+.route {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.route.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Animación para las transiciones de rutas */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.route.fade-in {
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
