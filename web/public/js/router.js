@@ -10,7 +10,8 @@ class Router {
             '/login': 'login',
             '/register': 'register',
             '/auth-email': 'auth-email',
-            '/main-view': 'main-view'
+            '/main-view': 'main-view',
+            '/db-status': 'db-status'  // Nueva ruta
         };
         
         // Inicializar el router

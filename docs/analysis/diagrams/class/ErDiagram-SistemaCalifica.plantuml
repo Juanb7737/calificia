@@ -1,0 +1,131 @@
+@startuml calificia-erd
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <b><u>x</u></b>
+!define foreign_key(x) <i>x</i>
+
+' Definición de entidades
+
+table(CLIENTE) {
+  primary_key(id)
+  correo
+  nombre
+  pass
+  tipoCuenta
+}
+
+table(PROFESOR) {
+  primary_key(id_cliente)
+}
+
+table(ESTUDIANTE) {
+  primary_key(id_cliente)
+  foreign_key(id_curso)
+}
+
+table(CURSO) {
+  primary_key(id)
+  nombre
+  nivelEducativo
+}
+
+table(GRUPO) {
+  primary_key(id)
+  nombre
+  foreign_key(id_profesor)
+}
+
+table(GRUPO_ESTUDIANTE) {
+  primary_key(id_grupo)
+  primary_key(id_estudiante)
+}
+
+table(EXAMEN) {
+  primary_key(id)
+  fechaCreacion
+  nivelEducativo
+  foreign_key(id_profesor)
+}
+
+table(EXAMEN_OBJETIVO) {
+  primary_key(id_examen)
+  primary_key(objetivo)
+}
+
+table(PREGUNTA) {
+  primary_key(id)
+  texto
+  tipoPregunta
+  respuestaCorrecta
+  puntaje
+  foreign_key(id_examen)
+}
+
+table(OPCIONES_PREGUNTA) {
+  primary_key(id_pregunta)
+  primary_key(opcion)
+}
+
+table(DOCUMENTO) {
+  primary_key(id)
+  nombre
+  contenido
+  fechaCarga
+}
+
+table(EXAMEN_DOCUMENTO) {
+  primary_key(id_examen)
+  primary_key(id_documento)
+}
+
+table(ASIGNACION_EXAMEN) {
+  primary_key(id_examen)
+  primary_key(id_grupo)
+  fechaAsignacion
+}
+
+table(RESULTADO) {
+  primary_key(id)
+  foreign_key(id_examen)
+  foreign_key(id_estudiante)
+  calificacion
+  fechaRealizacion
+}
+
+table(RESPUESTA) {
+  primary_key(id_resultado)
+  primary_key(id_pregunta)
+  respuesta
+}
+
+' Relaciones
+
+CLIENTE "1" -- "0..1" PROFESOR : es
+CLIENTE "1" -- "0..1" ESTUDIANTE : es
+
+ESTUDIANTE "N" -- "1" CURSO : pertenece a
+
+PROFESOR "1" -- "N" GRUPO : administra
+GRUPO "N" -- "M" ESTUDIANTE : contiene >
+GRUPO_ESTUDIANTE }-- GRUPO
+GRUPO_ESTUDIANTE }-- ESTUDIANTE
+
+PROFESOR "1" -- "N" EXAMEN : crea
+
+EXAMEN "1" -- "N" EXAMEN_OBJETIVO : tiene
+EXAMEN "1" -- "N" PREGUNTA : contiene
+PREGUNTA "1" -- "N" OPCIONES_PREGUNTA : tiene
+
+EXAMEN "N" -- "M" DOCUMENTO : usa >
+EXAMEN_DOCUMENTO }-- EXAMEN
+EXAMEN_DOCUMENTO }-- DOCUMENTO
+
+EXAMEN "N" -- "M" GRUPO : se asigna a >
+ASIGNACION_EXAMEN }-- EXAMEN
+ASIGNACION_EXAMEN }-- GRUPO
+
+ESTUDIANTE "1" -- "N" RESULTADO : obtiene
+EXAMEN "1" -- "N" RESULTADO : genera
+RESULTADO "1" -- "N" RESPUESTA : contiene
+
+@enduml

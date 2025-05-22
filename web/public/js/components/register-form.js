@@ -5,6 +5,7 @@ class RegisterForm extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.isLoading = false;
     }
     
     connectedCallback() {
@@ -149,15 +150,25 @@ class RegisterForm extends HTMLElement {
         this.shadowRoot.getElementById('login-btn').addEventListener('click', () => {
             window.router.navigate('/login');
         });
+        
+        // Actualizar el botón para mostrar estado de carga
+        const submitBtn = this.shadowRoot.getElementById('submit-btn');
+        if (submitBtn) {
+            submitBtn.innerHTML = this.isLoading 
+                ? '<span class="loading"></span> Registrando...'
+                : 'Registrarse';
+            submitBtn.disabled = this.isLoading;
+        }
     }
     
-    handleRegister() {
+    async handleRegister() {
+        if (this.isLoading) return;
+        
         const name = this.shadowRoot.getElementById('name').value;
         const email = this.shadowRoot.getElementById('email').value;
         const password = this.shadowRoot.getElementById('password').value;
         const confirmPassword = this.shadowRoot.getElementById('confirm-password').value;
         const errorMessage = this.shadowRoot.getElementById('error-message');
-        const submitBtn = this.shadowRoot.getElementById('submit-btn');
         
         // Validar que las contraseñas coincidan
         if (password !== confirmPassword) {
@@ -166,31 +177,45 @@ class RegisterForm extends HTMLElement {
             return;
         }
         
-        // Verificar si el correo ya está registrado
-        if (window.appState.isUserRegistered(email)) {
-            errorMessage.textContent = 'Este correo ya está registrado. Por favor, inicia sesión.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-        
         // Mostrar estado de carga
-        submitBtn.innerHTML = '<span class="loading"></span> Registrando...';
-        submitBtn.disabled = true;
+        this.isLoading = true;
+        this.render();
         
-        // Registrar usuario
-        window.appState.register({
-            name,
-            email,
-            password
-        }).then(() => {
+        try {
+            // Hacer solicitud a la API
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    name,
+                    email,
+                    password,
+                    userType: 2 // Por defecto, registrar como estudiante
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Error al registrar usuario');
+            }
+            
             // Resetear el formulario
             this.shadowRoot.getElementById('register-form').reset();
             errorMessage.style.display = 'none';
             
-            // Restaurar el botón
-            submitBtn.innerHTML = 'Registrarse';
-            submitBtn.disabled = false;
-        });
+            // Navegar a la página de verificación de correo
+            window.router.navigate('/auth-email');
+            
+        } catch (error) {
+            errorMessage.textContent = error.message;
+            errorMessage.style.display = 'block';
+        } finally {
+            this.isLoading = false;
+            this.render();
+        }
     }
 }
 

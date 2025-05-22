@@ -107,6 +107,10 @@ class NavBar extends HTMLElement {
                 ${this.currentUser 
                     ? `
                         <div class="user-info">
+                            <ul>
+                                <li><a href="#/main-view">Inicio</a></li>
+                                <li><a href="#/db-status">Estado DB</a></li>
+                            </ul>
                             <div class="avatar">${this.getInitials(this.currentUser.name)}</div>
                             <span>${this.currentUser.name}</span>
                             <button class="logout-btn" id="logout-btn">Cerrar sesión</button>

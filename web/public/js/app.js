@@ -10,9 +10,7 @@ const appState = {
     
     // Método para iniciar sesión
     login(userData) {
-        // Simulación de inicio de sesión
         this.currentUser = userData;
-        localStorage.setItem('currentUser', JSON.stringify(userData));
         
         // Emitir evento de cambio de usuario
         const event = new CustomEvent('userChanged', {
@@ -29,7 +27,7 @@ const appState = {
     // Método para cerrar sesión
     logout() {
         this.currentUser = null;
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('auth_token');
         
         // Emitir evento de cambio de usuario
         const event = new CustomEvent('userChanged', {
@@ -41,64 +39,51 @@ const appState = {
         window.router.navigate('/');
     },
     
-    // Método para registrar un nuevo usuario
-    register(userData) {
-        // Simulación de registro (en una aplicación real, esto sería una llamada a la API)
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                // Guardar usuario en localStorage (simulación de base de datos)
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                users.push(userData);
-                localStorage.setItem('users', JSON.stringify(users));
-                
-                resolve(true);
-                
-                // Navegar a la página de verificación de correo
-                window.router.navigate('/auth-email');
-            }, 1000);
-        });
-    },
-    
-    // Verificar si un usuario está registrado
-    isUserRegistered(email) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        return users.some(user => user.email === email);
-    },
-    
-    // Verificar credenciales
-    verifyCredentials(email, password) {
-        const users = JSON.parse(localStorage.getItem('users') || '[]');
-        const user = users.find(u => u.email === email && u.password === password);
+    // Verificar sesión actual con el token almacenado
+    async verifySession() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) return false;
         
-        if (user) {
-            // Iniciar sesión si las credenciales son correctas
-            this.login(user);
-            return true;
+        try {
+            // Aquí podrías hacer una petición al servidor para verificar el token
+            // Por ahora, asumiremos que el token es válido
+            // En una implementación real, verificarías el token con el servidor
+            
+            // Para implementación real:
+            /*
+            const response = await fetch('/api/verify-token', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Token inválido');
+            }
+            
+            const data = await response.json();
+            this.login(data.user);
+            */
+            
+            return !!this.currentUser;
+        } catch (error) {
+            console.error('Error al verificar sesión:', error);
+            this.logout();
+            return false;
         }
-        
-        return false;
     },
     
     // Inicializar la aplicación
-    init() {
-        // Verificar si hay un usuario en localStorage
-        const savedUser = localStorage.getItem('currentUser');
-        if (savedUser) {
-            this.currentUser = JSON.parse(savedUser);
-            
-            // Emitir evento de cambio de usuario
-            const event = new CustomEvent('userChanged', {
-                detail: { user: this.currentUser }
-            });
-            document.dispatchEvent(event);
-        }
+    async init() {
+        // Verificar si hay un token almacenado
+        await this.verifySession();
         
         // Escuchar el evento de cambio de ruta
         document.addEventListener('routeChanged', (e) => {
             const { route } = e.detail;
             
             // Rutas protegidas que requieren autenticación
-            if (route === 'main-view' && !this.currentUser) {
+            if ((route === 'main-view' || route === 'db-status') && !this.currentUser) {
                 window.router.navigate('/login');
             }
         });

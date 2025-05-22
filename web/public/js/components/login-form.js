@@ -5,6 +5,7 @@ class LoginForm extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
+        this.isLoading = false;
     }
     
     connectedCallback() {
@@ -89,6 +90,21 @@ class LoginForm extends HTMLElement {
                     border-left: 4px solid var(--error, #b00020);
                     margin-bottom: 1rem;
                 }
+
+                .loading {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    border: 3px solid rgba(255,255,255,.3);
+                    border-radius: 50%;
+                    border-top-color: white;
+                    animation: spin 1s ease-in-out infinite;
+                    margin-right: 8px;
+                }
+
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
             </style>
             
             <div class="card">
@@ -108,7 +124,7 @@ class LoginForm extends HTMLElement {
                     </div>
                     
                     <div class="buttons">
-                        <button type="submit">Iniciar Sesión</button>
+                        <button type="submit" id="login-btn">${this.isLoading ? '<span class="loading"></span> Iniciando sesión...' : 'Iniciar Sesión'}</button>
                         <button type="button" class="secondary" id="register-btn">Registrarse</button>
                     </div>
                 </form>
@@ -126,30 +142,50 @@ class LoginForm extends HTMLElement {
         });
     }
     
-    handleLogin() {
+    async handleLogin() {
+        if (this.isLoading) return;
+        
         const email = this.shadowRoot.getElementById('email').value;
         const password = this.shadowRoot.getElementById('password').value;
         const errorMessage = this.shadowRoot.getElementById('error-message');
         
-        // Verificar si el usuario está registrado
-        if (!window.appState.isUserRegistered(email)) {
-            errorMessage.textContent = 'Este correo no está registrado. Por favor, regístrate primero.';
+        // Mostrar estado de carga
+        this.isLoading = true;
+        this.render();
+        
+        try {
+            // Hacer solicitud a la API
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Error al iniciar sesión');
+            }
+            
+            // Guardar token en localStorage
+            localStorage.setItem('auth_token', data.token);
+            
+            // Iniciar sesión en el estado global
+            window.appState.login(data.user);
+            
+            // Resetear el formulario
+            this.shadowRoot.getElementById('login-form').reset();
+            errorMessage.style.display = 'none';
+            
+        } catch (error) {
+            errorMessage.textContent = error.message;
             errorMessage.style.display = 'block';
-            return;
+        } finally {
+            this.isLoading = false;
+            this.render();
         }
-        
-        // Verificar credenciales
-        const success = window.appState.verifyCredentials(email, password);
-        
-        if (!success) {
-            errorMessage.textContent = 'Correo o contraseña incorrectos. Por favor, intenta de nuevo.';
-            errorMessage.style.display = 'block';
-            return;
-        }
-        
-        // Resetear el formulario
-        this.shadowRoot.getElementById('login-form').reset();
-        errorMessage.style.display = 'none';
     }
 }
 
